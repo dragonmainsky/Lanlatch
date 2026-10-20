@@ -1,22 +1,22 @@
 # Lanlatch
 
-**Lanlatch** เป็นเครื่องมือสำหรับสแกนหาเราเตอร์ทุกตัวในวงแลน (LAN) ของคุณ แสดงผลเป็นตารางที่เข้าใจง่าย พร้อมลิงก์เปิดหน้าล็อกอินของแต่ละตัวได้โดยตรง และช่วยจดจำข้อมูลการตั้งค่า/รหัสผ่านที่ **คุณกรอกเอง** ไว้ใช้งานในครั้งต่อไป
+**Lanlatch** is a tool that scans your local network (LAN) for routers, displays them in an easy-to-read table, and lets you open each one's login page directly. It can also remember the configuration details and passwords **you enter yourself** for convenient access later.
 
-> ⚠️ Lanlatch **ไม่ใช่เครื่องมือแฮก** ไม่มีฟังก์ชันเดารหัสผ่าน, brute-force หรือเจาะระบบใดๆ ทั้งสิ้น โปรแกรมทำหน้าที่แค่ค้นหาอุปกรณ์ในเครือข่ายที่คุณเชื่อมต่ออยู่ และเก็บข้อมูลที่คุณป้อนเข้าไปเองอย่างปลอดภัย
+> ⚠️ Lanlatch is **not a hacking tool**. It has no password guessing, brute-force, or intrusion features of any kind. The program only discovers devices on the network you're connected to and securely stores the credentials you provide yourself.
 
-## ฟีเจอร์
+## Features
 
-- 🔍 สแกนหาอุปกรณ์ทั้งหมดในวงแลน และคัดกรองว่าตัวไหนน่าจะเป็นเราเตอร์/จุดเข้าถึง
-- 📋 แสดงผลเป็นตาราง: ชื่อ, IP, MAC, ยี่ห้อ, สถานะ
-- 🌐 คลิกที่ IP เพื่อเปิดหน้าล็อกอินของเราเตอร์ในเบราว์เซอร์ได้ทันที
-- 🔐 บันทึก username/password ของแต่ละเราเตอร์ (ที่ผู้ใช้กรอกเอง) โดยเข้ารหัสด้วย Master Password
-- 🗂️ จัดกลุ่ม/ตั้งชื่อเล่นให้เราเตอร์แต่ละตัว เพื่อจำง่ายเวลามีหลายจุด
+- 🔍 Scans all devices on your LAN and identifies which ones are likely routers/access points
+- 📋 Displays results in a table: name, IP, MAC, vendor, status
+- 🌐 Click an IP to open that router's login page directly in your browser
+- 🔐 Save each router's username/password (entered by you) encrypted with a Master Password
+- 🗂️ Group or nickname your routers for easy reference when managing multiple sites
 
-## สถานะโปรเจกต์
+## Project Status
 
-🚧 อยู่ระหว่างการพัฒนา (early development) — โครงสร้างและฟีเจอร์อาจเปลี่ยนแปลงได้
+🚧 Early development — structure and features may change.
 
-## การติดตั้ง
+## Installation
 
 ```bash
 git clone https://github.com/<your-username>/lanlatch.git
@@ -24,41 +24,41 @@ cd lanlatch
 pip install -r requirements.txt
 ```
 
-## การใช้งาน
+## Usage
 
 ```bash
 python main.py
 ```
 
-1. ตั้ง Master Password ในการรันครั้งแรก (ใช้เข้ารหัสข้อมูลที่บันทึกไว้)
-2. กด **สแกนใหม่** เพื่อค้นหาเราเตอร์ในวงแลน
-3. คลิกที่ IP ของเราเตอร์เพื่อเปิดหน้าล็อกอิน
-4. กรอก username/password ของคุณเองในโปรแกรม เพื่อบันทึกไว้ใช้ครั้งถัดไป
+1. Set a Master Password on first run (used to encrypt saved data)
+2. Click **Scan** to discover routers on your LAN
+3. Click a router's IP to open its login page
+4. Enter your own username/password in the app to save it for next time
 
-## เทคโนโลยีที่ใช้
+## Tech Stack
 
 - Python 3
-- `socket` / `psutil` — ค้นหาอุปกรณ์ในเครือข่าย
-- `requests` — ตรวจสอบหน้าเว็บของอุปกรณ์
-- `sqlite3` — จัดเก็บข้อมูล
-- `cryptography` — เข้ารหัสรหัสผ่านที่บันทึกไว้
-- Tkinter — หน้าต่างโปรแกรม
+- `socket` / `psutil` — network device discovery
+- `requests` — inspecting device web pages
+- `sqlite3` — data storage
+- `cryptography` — encrypting saved passwords
+- Tkinter — desktop UI
 
-## ความปลอดภัยของข้อมูล
+## Data Security
 
-- รหัสผ่านทั้งหมดถูกเข้ารหัสก่อนบันทึกลงดิสก์ ไม่มีการเก็บเป็นข้อความธรรมดา (plain text)
-- Master Password ไม่ถูกส่งออกไปที่ใดนอกเครื่องของคุณ
-- โปรแกรมทำงานเฉพาะในเครือข่ายท้องถิ่น (LAN) ของคุณเท่านั้น ไม่มีการส่งข้อมูลออกสู่อินเทอร์เน็ต
+- All passwords are encrypted before being written to disk — nothing is stored as plain text
+- The Master Password never leaves your machine
+- The app only operates on your local network (LAN); no data is sent to the internet
 
-## ข้อควรระวัง
+## Caution
 
-- ใช้เครื่องมือนี้เฉพาะกับเครือข่ายที่คุณเป็นเจ้าของหรือได้รับอนุญาตให้จัดการเท่านั้น
-- ผลการสแกนอาจไม่ครบ 100% ขึ้นอยู่กับการตั้งค่าไฟร์วอลล์/AP isolation ของแต่ละเครือข่าย
+- Only use this tool on networks you own or have permission to manage
+- Scan results may not be 100% complete, depending on each network's firewall/AP isolation settings
 
 ## License
 
-โปรเจกต์นี้เผยแพร่ภายใต้ [MIT License](LICENSE)
+This project is released under the [MIT License](LICENSE)
 
-## การมีส่วนร่วม
+## Contributing
 
-ยินดีรับ Pull Request และ Issue — หากพบบั๊กหรือมีไอเดียฟีเจอร์ใหม่ สามารถเปิด Issue ได้เลยครับ
+Pull requests and issues are welcome — feel free to open an issue if you find a bug or have a feature idea.
